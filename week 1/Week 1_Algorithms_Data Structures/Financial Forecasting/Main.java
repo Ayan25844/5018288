@@ -1,5 +1,5 @@
-
-// 1. Recursion is a programming technique where a function calls itself to solve smaller instances of a problem until it reaches a base case. This approach can simplify problems by breaking them down into more manageable subproblems. For example, calculating the factorial of a number n (n!) is naturally recursive: n! = n * (n-1)! with the base case 1! = 1. Recursion is particularly effective for problems like tree traversals and the Fibonacci sequence, where each step builds upon the results of previous steps.
+// Q1. Explain the concept of recursion and how it can simplify certain problems.
+// A1. Recursion is a programming technique where a function calls itself to solve smaller instances of a problem until it reaches a base case. This approach can simplify problems by breaking them down into more manageable subproblems. For example, calculating the factorial of a number n (n!) is naturally recursive: n! = n * (n-1)! with the base case 1! = 1. Recursion is particularly effective for problems like tree traversals and the Fibonacci sequence, where each step builds upon the results of previous steps.
 
 public class Main {
     public static void main(String[] args) {
@@ -12,8 +12,8 @@ public class Main {
     }
 
     public static double calculateFutureValue(double pv, double rate, int n) {
-
-        // 2. The given recursive algorithm for calculating future value has a time
+// Q2. Discuss the time complexity of your recursive algorithm.
+        // A2. The given recursive algorithm for calculating future value has a time
         // complexity of O(n). This is because the function makes a single recursive
         // call for each period n, decrementing n by 1 each time. Therefore, the
         // function will be called n times before reaching the base case n = 0. Since
@@ -33,8 +33,8 @@ public class Main {
         return calculateFutureValue(pv * (1 + rate), rate, n - 1);
     }
 }
-
-// 3. To optimize the above recursive solution and avoid excessive computation,
+// Q3. Explain how to optimize the recursive solution to avoid excessive computation.
+// A3. To optimize the above recursive solution and avoid excessive computation,
 // an iterative approach can be used. By using a loop instead of recursion, the
 // future value can be computed in a single pass, which eliminates the overhead
 // of multiple recursive calls. This approach also has a time complexity of
