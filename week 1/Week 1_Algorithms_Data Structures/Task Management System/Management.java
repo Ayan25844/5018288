@@ -1,7 +1,6 @@
-
-// 1. A singly linked list is a linear data structure consisting of a sequence of nodes, where each node contains a data element and a reference (or pointer) to the next node in the sequence. This allows for efficient insertion and deletion of nodes, as it only requires updating the pointers of adjacent nodes. However, because each node points only to the next node, traversing the list in reverse or accessing nodes randomly can be less efficient, requiring a linear search from the head of the list.
-
-// 1. A doubly linked list is similar to a singly linked list but with an added complexity: each node contains two references—one to the next node and another to the previous node. This bidirectional structure allows for traversal in both directions, making operations like insertion and deletion at both ends of the list more efficient. However, it requires more memory to store the additional pointer, which can lead to slightly increased overhead compared to singly linked lists.
+// Q1. Explain the different types of linked lists (Singly Linked List, Doubly Linked List).
+// A1. A singly linked list is a linear data structure consisting of a sequence of nodes, where each node contains a data element and a reference (or pointer) to the next node in the sequence. This allows for efficient insertion and deletion of nodes, as it only requires updating the pointers of adjacent nodes. However, because each node points only to the next node, traversing the list in reverse or accessing nodes randomly can be less efficient, requiring a linear search from the head of the list.
+// A1. A doubly linked list is similar to a singly linked list but with an added complexity: each node contains two references—one to the next node and another to the previous node. This bidirectional structure allows for traversal in both directions, making operations like insertion and deletion at both ends of the list more efficient. However, it requires more memory to store the additional pointer, which can lead to slightly increased overhead compared to singly linked lists.
 
 public class Management {
 
@@ -34,10 +33,10 @@ public class Management {
         tail = node;
         size++;
     }
-
+// Q2. Analyze the time complexity of each operation.
     public void add(String name, boolean status, int index) {
 
-        // 2. Adding a node at the beginning is done in constant time O(1) by updating
+        // A2. Adding a node at the beginning is done in constant time O(1) by updating
         // the head pointer.
 
         if (index == 0) {
@@ -45,7 +44,7 @@ public class Management {
             return;
         }
 
-        // 2. Adding a node at the end is done in constant time O(1) by updating
+        // A2. Adding a node at the end is done in constant time O(1) by updating
         // the tail pointer.
 
         if (index == size) {
@@ -53,7 +52,7 @@ public class Management {
             return;
         }
 
-        // 2. For other indices, it requires traversing to the index, which takes
+        // A2. For other indices, it requires traversing to the index, which takes
         // linear time O(n).
 
         Node temp = head;
@@ -82,21 +81,21 @@ public class Management {
 
     public Task delete(int index) {
 
-        // 2. Deleting the first node O(1) is done in constant time by updating the head
+        // A2. Deleting the first node O(1) is done in constant time by updating the head
         // pointer.
 
         if (index == 0) {
             return deleteFirst();
         }
 
-        // 2. If the list has more than one node, it traverses to find the second last
+        // A2. If the list has more than one node, it traverses to find the second last
         // node, resulting in linear time complexity O(n).
 
         if (index == size - 1) {
             return deleteLast();
         }
 
-        // 2. It requires traversing to the specified index to find the previous node,
+        // A2. It requires traversing to the specified index to find the previous node,
         // leading to linear time complexity O(n).
 
         Node prev = get(index - 1);
@@ -109,7 +108,7 @@ public class Management {
 
     public String search(int value) {
 
-        // 2. The search operation requires traversing the entire list in the worst case
+        // A2. The search operation requires traversing the entire list in the worst case
         // to find a node, which takes linear time O(n).
 
         Node node = head;
@@ -142,7 +141,7 @@ public class Management {
 
     public void traverse() {
 
-        // 2. This operation requires visiting each node in the list, leading to linear
+        // A2. This operation requires visiting each node in the list, leading to linear
         // time complexity O(n).
 
         Node temp = head;
@@ -169,28 +168,28 @@ public class Management {
         }
     }
 
-    // 2. In summary, the operations that involve traversing the list (such as add,
+    // A2. In summary, the operations that involve traversing the list (such as add,
     // delete, search, and get) have a time complexity of O(n), while operations
     // that add or remove nodes at the beginning (like addFirst and deleteFirst)
     // have a time complexity of O(1).
 
 }
+// Q3. Discuss the advantages of linked lists over arrays for dynamic data.
+// A3. Linked lists offer several advantages over arrays for dynamic data:
 
-// 3. Linked lists offer several advantages over arrays for dynamic data:
-
-// 3. Dynamic Size: Linked lists can easily grow or shrink in size by adding or
+// A3. Dynamic Size: Linked lists can easily grow or shrink in size by adding or
 // removing nodes, while arrays have a fixed size and require resizing or
 // reallocating memory to accommodate additional elements.
 
-// 3. Efficient Insertions/Deletions: Inserting or deleting nodes in a linked
+// A3. Efficient Insertions/Deletions: Inserting or deleting nodes in a linked
 // list is efficient (O(1) for the first or last node, O(n) for specific
 // positions) because it involves adjusting pointers rather than shifting
 // elements as in arrays.
 
-// 3. Memory Utilization: Linked lists can utilize memory more efficiently by
+// A3. Memory Utilization: Linked lists can utilize memory more efficiently by
 // allocating memory only as needed for each node, avoiding wasted space
 // associated with larger arrays that may be partially filled.
 
-// 3. No Need for Contiguous Memory: Linked lists do not require contiguous
+// A3. No Need for Contiguous Memory: Linked lists do not require contiguous
 // memory allocation, making them less prone to fragmentation and better suited
 // for applications with unpredictable memory needs.
