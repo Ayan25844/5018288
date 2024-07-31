@@ -1,12 +1,11 @@
+// Q1. Explain how arrays are represented in memory and their advantages.
+// A1. Arrays are represented in memory as a contiguous block of memory locations, where each element is stored sequentially. The first element is accessed using a base address, and subsequent elements are accessed by adding an offset (index multiplied by the element size).
+// A1. Advantages of arrays:
 
-// 1. Arrays are represented in memory as a contiguous block of memory locations, where each element is stored sequentially. The first element is accessed using a base address, and subsequent elements are accessed by adding an offset (index multiplied by the element size).
-
-// 1. Advantages of arrays:
-
-// 1. Fast Access: Constant time O(1) access to elements via indexing.
-// 1. Memory Efficiency: Contiguous allocation minimizes overhead and improves cache locality.
-// 1. Simplicity: Easy to implement and use, especially for fixed-size collections of elements.
-// 1. Data Structure Compatibility: Can be easily used to implement other data structures like stacks, queues, and matrices.
+// A1. Fast Access: Constant time O(1) access to elements via indexing.
+// A1. Memory Efficiency: Contiguous allocation minimizes overhead and improves cache locality.
+// A1. Simplicity: Easy to implement and use, especially for fixed-size collections of elements.
+// A1. Data Structure Compatibility: Can be easily used to implement other data structures like stacks, queues, and matrices.
 
 public class DataBase {
 
@@ -17,11 +16,11 @@ public class DataBase {
         Employee employee = new Employee(name, salary, position);
         this.add(employee);
     }
-
+// Q2. Analyze the time complexity of each operation (add, search, traverse, delete).
     private static void traverse() {
 
-        // 2. Time Complexity: O(n)
-        // 2. Reason: It iterates through the entire list to print each non-null
+        // A2. Time Complexity: O(n)
+        // A2. Reason: It iterates through the entire list to print each non-null
         // employee.
 
         System.out.println("{");
@@ -38,8 +37,8 @@ public class DataBase {
 
     public void add(Employee employee) {
 
-        // 2.Time Complexity: O(1)
-        // 2. Reason: It checks the index and adds an employee in constant time if
+        // A2.Time Complexity: O(1)
+        // A2. Reason: It checks the index and adds an employee in constant time if
         // there's space.
 
         if (index < list.length) {
@@ -53,8 +52,8 @@ public class DataBase {
 
     public static String search(int target) {
 
-        // 2. Time Complexity: O(n)
-        // 2. Reason: It iterates through the entire list to find the employee with the
+        // A2. Time Complexity: O(n)
+        // A2. Reason: It iterates through the entire list to find the employee with the
         // target ID.
 
         for (Employee i : list) {
@@ -67,8 +66,8 @@ public class DataBase {
 
     public static String delete(int target) {
 
-        // 2. Time Complexity: O(n)
-        // 2. Reason: It iterates through the list to find the target employee, and then
+        // A2. Time Complexity: O(n)
+        // A2. Reason: It iterates through the list to find the target employee, and then
         // shifts elements, which can take up to O(n) in the worst case.
 
         for (int i = 0; i < list.length; i++) {
@@ -84,30 +83,30 @@ public class DataBase {
         return ("Employee with ID " + target + " not found.");
     }
 
-    // 2. In summary:
+    // A2. In summary:
 
-    // 2. Traverse: O(n)
-    // 2. Add: O(1) + O(n) (due to traverse)
-    // 2. Search: O(n)
-    // 2. Delete: O(n)
+    // A2. Traverse: O(n)
+    // A2. Add: O(1) + O(n) (due to traverse)
+    // A2. Search: O(n)
+    // A2. Delete: O(n)
 }
+// Q3. Discuss the limitations of arrays and when to use them.
+// A3. Limitations of Arrays:
 
-// 3. Limitations of Arrays:
-
-// 3. Fixed Size: Once declared, the size of an array cannot be changed, leading
+// A3. Fixed Size: Once declared, the size of an array cannot be changed, leading
 // to potential wasted space or overflow if the capacity is exceeded.
-// 3. Inefficient Insertions/Deletions: Adding or removing elements (except at
+// A3. Inefficient Insertions/Deletions: Adding or removing elements (except at
 // the end) requires shifting elements, which can be time-consuming O(n).
-// 3. Homogeneous Elements: Arrays can typically only store elements of the same
+// A3. Homogeneous Elements: Arrays can typically only store elements of the same
 // data type, limiting flexibility.
-// 3. Memory Allocation: Contiguous memory allocation can lead to fragmentation,
+// A3. Memory Allocation: Contiguous memory allocation can lead to fragmentation,
 // especially in large arrays.
 
-// 3. When to Use Arrays:
+// A3. When to Use Arrays:
 
-// 3. When the size of the dataset is known in advance and remains constant.
-// 3. For applications that require fast access to elements using indices.
-// 3. When working with homogeneous data types and simple data structures (like
+// A3. When the size of the dataset is known in advance and remains constant.
+// A3. For applications that require fast access to elements using indices.
+// A3. When working with homogeneous data types and simple data structures (like
 // matrices).
-// 3. In scenarios where memory efficiency is crucial, and you can benefit from
+// A3. In scenarios where memory efficiency is crucial, and you can benefit from
 // contiguous memory allocation.
