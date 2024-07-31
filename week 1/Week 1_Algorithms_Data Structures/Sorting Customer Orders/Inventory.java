@@ -1,11 +1,8 @@
-
-// 1. Bubble Sort: Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. This process is repeated until the list is sorted. It gets its name because smaller elements "bubble" to the top of the list. While easy to understand, bubble sort is inefficient for large datasets, with a time complexity of O(n²).
-
-// 1. Insertion Sort: Insertion sort builds a sorted array one element at a time by taking an unsorted element and inserting it into its correct position in the already sorted part of the array. It works similarly to how one might sort playing cards in hand. This algorithm is efficient for small datasets and has a time complexity of O(n²) in the average and worst cases, but O(n) in the best case when the array is already sorted.
-
-// 1. Quick Sort: Quick sort is a highly efficient sorting algorithm that uses a divide-and-conquer approach. It selects a 'pivot' element from the array and partitions the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively. Quick sort has an average-case time complexity of O(n log n) and is often faster in practice than other O(n log n) algorithms.
-
-// 1. Merge Sort: Merge sort is another divide-and-conquer algorithm that splits the array into two halves, sorts each half, and then merges the sorted halves back together. This process continues recursively until the entire array is sorted. Merge sort is particularly efficient for large datasets and has a time complexity of O(n log n) in all cases, making it a stable sorting algorithm suitable for linked lists and large datasets.
+// Q1. Explain different sorting algorithms (Bubble Sort, Insertion Sort, Quick Sort, Merge Sort).
+// A1. Bubble Sort: Bubble sort is a simple sorting algorithm that repeatedly steps through the list, compares adjacent elements, and swaps them if they are in the wrong order. This process is repeated until the list is sorted. It gets its name because smaller elements "bubble" to the top of the list. While easy to understand, bubble sort is inefficient for large datasets, with a time complexity of O(n²).
+// A1. Insertion Sort: Insertion sort builds a sorted array one element at a time by taking an unsorted element and inserting it into its correct position in the already sorted part of the array. It works similarly to how one might sort playing cards in hand. This algorithm is efficient for small datasets and has a time complexity of O(n²) in the average and worst cases, but O(n) in the best case when the array is already sorted.
+// A1. Quick Sort: Quick sort is a highly efficient sorting algorithm that uses a divide-and-conquer approach. It selects a 'pivot' element from the array and partitions the other elements into two sub-arrays according to whether they are less than or greater than the pivot. The sub-arrays are then sorted recursively. Quick sort has an average-case time complexity of O(n log n) and is often faster in practice than other O(n log n) algorithms.
+// A1. Merge Sort: Merge sort is another divide-and-conquer algorithm that splits the array into two halves, sorts each half, and then merges the sorted halves back together. This process continues recursively until the entire array is sorted. Merge sort is particularly efficient for large datasets and has a time complexity of O(n log n) in all cases, making it a stable sorting algorithm suitable for linked lists and large datasets.
 
 import java.util.ArrayList;
 
@@ -34,10 +31,10 @@ public class Inventory {
         System.out.print("Order item " + order.getOrderId() + " added : ");
         print();
     }
-
+// Q2. Compare the performance (time complexity) of Bubble Sort and Quick Sort.
     public static void bubbleSort() {
 
-        // 2. Bubble sort has a time complexity of O(n²) in the average and worst
+        // A2. Bubble sort has a time complexity of O(n²) in the average and worst
         // cases, as it requires nested loops to compare and potentially swap elements,
         // making it inefficient for large datasets. The best case is O(n) if the list
         // is already sorted, as it can terminate early if no swaps occur.
@@ -62,7 +59,7 @@ public class Inventory {
 
     public static void quickSort(int low, int high) {
 
-        // 2. Quick sort has an average-case time complexity of O(n log n), which
+        // A2. Quick sort has an average-case time complexity of O(n log n), which
         // makes it much more efficient for larger datasets. In the worst case, which
         // occurs when the smallest or largest element is consistently chosen as the
         // pivot (leading to unbalanced partitions), its time complexity can degrade to
@@ -98,27 +95,24 @@ public class Inventory {
         return list.size();
     }
 
-    // 2. In summary, quick sort is generally more efficient than bubble sort,
+    // A2. In summary, quick sort is generally more efficient than bubble sort,
     // especially for larger lists.
 }
+// Q3. Discuss why Quick Sort is generally preferred over Bubble Sort.
+// A3. Quick sort is generally preferred over bubble sort for several reasons:
 
-// 3. Quick sort is generally preferred over bubble sort for several reasons:
-
-// 3. Efficiency: Quick sort has an average time complexity of O(n log n),
+// A3. Efficiency: Quick sort has an average time complexity of O(n log n),
 // making it significantly faster than bubble sort's O(n²) for large datasets.
 // This efficiency allows quick sort to handle larger lists much more
 // effectively.
-
-// 3. Divide-and-Conquer: Quick sort uses a divide-and-conquer approach, which
+// A3. Divide-and-Conquer: Quick sort uses a divide-and-conquer approach, which
 // allows it to sort subarrays independently and efficiently. This method of
 // partitioning leads to faster sorting compared to the repeated comparisons and
 // swaps of bubble sort.
-
-// 3. Less Comparisons: Quick sort performs fewer comparisons on average
+// A3. Less Comparisons: Quick sort performs fewer comparisons on average
 // compared to bubble sort, especially in cases where the data is large and not
 // sorted. This reduces the number of operations needed to sort the data.
-
-// 3. Adaptability: Quick sort can be optimized with better pivot selection
+// A3. Adaptability: Quick sort can be optimized with better pivot selection
 // methods, further improving its performance in
 // practical scenarios. In contrast, bubble sort's straightforward approach
 // lacks such optimizations.
