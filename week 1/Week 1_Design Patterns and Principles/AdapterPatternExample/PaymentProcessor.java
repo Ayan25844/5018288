@@ -1,3 +1,5 @@
 public interface PaymentProcessor {
-    void processPayment(double amount);
+
+    public String processPayment();
+
 }
