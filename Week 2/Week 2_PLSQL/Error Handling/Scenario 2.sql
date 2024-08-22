@@ -1,49 +1,30 @@
--- Write a stored procedure UpdateSalary that increases the salary of an employee by a given percentage. If the employee ID does not exist, handle the exception and log an error message.
-
-CREATE OR REPLACE PROCEDURE UPDATESALARY (
-    P_EMPLOYEEID IN NUMBER,
-    P_PERCENTAGE IN NUMBER
+CREATE OR REPLACE PROCEDURE UPDATESALARY(
+    ID IN EMPLOYEES.EMPLOYEEID%TYPE,
+    PERCENTAGE IN NUMBER
 ) IS
-    EMPLOYEE_NOT_FOUND EXCEPTION;
-    EMPLOYEE_NOT_FOUND_MSG VARCHAR2(100);
+    ID_CHECK EMPLOYEES.EMPLOYEEID%TYPE;
 BEGIN
- 
-    -- Check if the percentage is positive
-    IF P_PERCENTAGE <= 0 THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Percentage must be greater than zero');
-    END IF;
- 
-
-    -- Update the employee's salary
+    SELECT
+        EMPLOYEEID INTO ID_CHECK
+    FROM
+        EMPLOYEES
+    WHERE
+        EMPLOYEEID = ID;
     UPDATE EMPLOYEES
     SET
-        SALARY = SALARY + (
-            SALARY * P_PERCENTAGE / 100
+        SALARY=FLOOR(
+            SALARY+(SALARY*(PERCENTAGE/100))
         )
     WHERE
-        EMPLOYEEID = P_EMPLOYEEID;
- 
-    -- Check if the update affected any rows
-    IF SQL%ROWCOUNT = 0 THEN
-        EMPLOYEE_NOT_FOUND_MSG := 'Employee with ID '
-                                  || P_EMPLOYEEID
-                                  || ' not found';
-        RAISE EMPLOYEE_NOT_FOUND;
-    END IF;
- 
-
-    -- Commit the transaction
-    COMMIT;
+        EMPLOYEEID=ID;
 EXCEPTION
-    WHEN EMPLOYEE_NOT_FOUND THEN
- 
-        -- Log the error message
-        DBMS_OUTPUT.PUT_LINE(EMPLOYEE_NOT_FOUND_MSG);
-        RAISE_APPLICATION_ERROR(-20002, EMPLOYEE_NOT_FOUND_MSG);
+    WHEN NO_DATA_FOUND THEN
+        DBMS_OUTPUT.PUT_LINE('ERROR: EMPLOYEE ID '
+                             ||ID
+                             ||' DOES NOT EXIST IN THE RELATION.');
     WHEN OTHERS THEN
- 
-        -- Handle any other unexpected errors
-        DBMS_OUTPUT.PUT_LINE('An unexpected error occurred: '
-                             || SQLERRM);
-        RAISE;
-END UPDATESALARY;
+        DBMS_OUTPUT.PUT_LINE('ERROR CODE: '
+                             ||SQLCODE);
+        DBMS_OUTPUT.PUT_LINE('ERROR MESSEGE: '
+                             ||SQLERRM);
+END;
