@@ -1,48 +1,48 @@
 package com.example.EmployeeManagementSystem.model;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import lombok.Data;
+import java.util.Date;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
-import org.hibernate.annotations.BatchSize;
 import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import lombok.Data;
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.NamedQuery;
+import jakarta.persistence.NamedQueries;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.EntityListeners;
 
-@Entity
-@Table(name = "departments")
 @Data
+@Entity
+@Table(name = "departmentDetails")
 @NamedQueries({
-        @NamedQuery(name = "Department.findByName", query = "SELECT d FROM Department d WHERE d.name = :name"),
-        @NamedQuery(name = "Department.findDepartmentsWithEmployeeCountGreaterThan", query = "SELECT d FROM Department d WHERE (SELECT COUNT(e) FROM Employee e WHERE e.department.id = d.id) > :minEmployeeCount")
+        @NamedQuery(name = "Department.findByName", query = "SELECT e FROM Department e WHERE e.name=:name")
 })
+@EntityListeners(AuditingEntityListener.class)
 public class Department {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     private String name;
 
-    @OneToMany(mappedBy = "department", fetch = FetchType.LAZY)
-    @Fetch(FetchMode.SELECT) // Example of Hibernate-specific fetch mode
-    @BatchSize(size = 10) // Example of Hibernate-specific batch size
-    private List<Employee> employees;
-
+    @Temporal(TemporalType.TIMESTAMP)
     @CreatedDate
-    private LocalDateTime createdDate;
-
+    private Date createDate;
+    @CreatedBy
+    private String createdBy;
+    @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
-    private LocalDateTime lastModifiedDate;
-
+    private Date LastModifiedDate;
     @LastModifiedBy
-    @Column(nullable = false)
     private String lastModifiedBy;
 
-    @CreatedBy
-    @Column(nullable = false, updatable = false)
-    private String createdBy;
 }
