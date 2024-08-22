@@ -1,12 +1,13 @@
 public class SquareAdapter implements PaymentProcessor {
-    private Square square;
 
-    public SquareAdapter(Square square) {
-        this.square = square;
+    private Square amount;
+
+    public SquareAdapter() {
+        amount = new Square();
     }
 
-    @Override
-    public void processPayment(double amount) {
-        square.executePayment(amount);
+    public String processPayment() {
+        return amount.sendPayment();
     }
+
 }
