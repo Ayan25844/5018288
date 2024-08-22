@@ -1,33 +1,25 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class StockMarket implements Stock {
-    private List<Observer> observers;
-    private double stockPrice;
+
+    private final ArrayList<Observer> list;
 
     public StockMarket() {
-        this.observers = new ArrayList<>();
+        list = new ArrayList<>();
     }
 
-    @Override
-    public void register(Observer observer) {
-        observers.add(observer);
+    public void register(Observer customer) {
+        list.add(customer);
     }
 
-    @Override
-    public void deregister(Observer observer) {
-        observers.remove(observer);
+    public void deregister(Observer customer) {
+        list.remove(customer);
     }
 
-    @Override
-    public void notifyObservers() {
-        for (Observer observer : observers) {
-            observer.update(stockPrice);
+    public void notifyCustomers() {
+        for (Observer customer : list) {
+            customer.update();
         }
     }
 
-    public void setStockPrice(double stockPrice) {
-        this.stockPrice = stockPrice;
-        notifyObservers();
-    }
 }
