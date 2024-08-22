@@ -1,12 +1,13 @@
 public class PayPalAdapter implements PaymentProcessor {
-    private PayPal payPal;
 
-    public PayPalAdapter(PayPal payPal) {
-        this.payPal = payPal;
+    private PayPal amount;
+
+    public PayPalAdapter() {
+        amount = new PayPal();
     }
 
-    @Override
-    public void processPayment(double amount) {
-        payPal.sendPayment(amount);
+    public String processPayment() {
+        return amount.sendPayment();
     }
+
 }
