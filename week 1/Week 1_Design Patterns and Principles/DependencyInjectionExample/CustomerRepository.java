@@ -1,3 +1,5 @@
 public interface CustomerRepository {
-    String findCustomerById(String id);
+
+    public void findCustomerById(int id);
+
 }
