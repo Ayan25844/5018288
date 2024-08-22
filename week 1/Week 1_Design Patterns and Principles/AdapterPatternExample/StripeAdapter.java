@@ -1,12 +1,13 @@
 public class StripeAdapter implements PaymentProcessor {
-    private Stripe stripe;
 
-    public StripeAdapter(Stripe stripe) {
-        this.stripe = stripe;
+    private Stripe amount;
+
+    public StripeAdapter() {
+        amount = new Stripe();
     }
 
-    @Override
-    public void processPayment(double amount) {
-        stripe.makePayment(amount);
+    public String processPayment() {
+        return amount.sendPayment();
     }
+
 }
