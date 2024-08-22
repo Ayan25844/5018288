@@ -1,8 +1,9 @@
 public interface Document {
 
-    void open();
+    public String open();
 
-    void save();
+    public String save();
 
-    void close();
+    public String close();
+
 }
