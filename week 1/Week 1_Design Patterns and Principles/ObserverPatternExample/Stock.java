@@ -1,7 +1,9 @@
 public interface Stock {
-    void register(Observer observer);
 
-    void deregister(Observer observer);
+    public void notifyCustomers();
 
-    void notifyObservers();
+    public void register(Observer customer);
+
+    public void deregister(Observer Customer);
+
 }
