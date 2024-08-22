@@ -1,40 +1,28 @@
--- Write a stored procedure TransferFunds that transfers a specified amount from one account to another, checking that the source account has sufficient balance before making the transfer.
-
-CREATE OR REPLACE PROCEDURE TRANSFERFUNDS (
-    P_SOURCE_ACCOUNT_ID IN NUMBER,
-    P_TARGET_ACCOUNT_ID IN NUMBER,
-    P_AMOUNT IN NUMBER
+CREATE OR REPLACE PROCEDURE TRANSFERFUNDS(
+    FROM_ACCOUNT IN ACCOUNTS.ACCOUNTID%TYPE,
+    TO_ACCOUNT IN ACCOUNTS.ACCOUNTID%TYPE,
+    AMOUNT IN ACCOUNTS.BALANCE%TYPE
 ) IS
-    V_BALANCE NUMBER;
+    BAL ACCOUNTS.BALANCE%TYPE;
 BEGIN
- 
-    -- Check if the source account has sufficient balance
     SELECT
-        BALANCE INTO V_BALANCE
+        BALANCE INTO BAL
     FROM
         ACCOUNTS
     WHERE
-        ACCOUNTID = P_SOURCE_ACCOUNT_ID;
-    IF V_BALANCE < P_AMOUNT THEN
-        RAISE_APPLICATION_ERROR(-20001, 'Insufficient balance in the source account.');
+        ACCOUNTID=FROM_ACCOUNT;
+    IF BAL>=AMOUNT THEN
+        UPDATE ACCOUNTS
+        SET
+            BALANCE=BALANCE-AMOUNT
+        WHERE
+            ACCOUNTID=FROM_ACCOUNT;
+        UPDATE ACCOUNTS
+        SET
+            BALANCE=BALANCE+AMOUNT
+        WHERE
+            ACCOUNTID=TO_ACCOUNT;
     ELSE
- 
-        -- Deduct the amount from the source account
-        UPDATE ACCOUNTS
-        SET
-            BALANCE = BALANCE - P_AMOUNT,
-            LASTMODIFIED = SYSDATE
-        WHERE
-            ACCOUNTID = P_SOURCE_ACCOUNT_ID;
- 
-        -- Add the amount to the target account
-        UPDATE ACCOUNTS
-        SET
-            BALANCE = BALANCE + P_AMOUNT,
-            LASTMODIFIED = SYSDATE
-        WHERE
-            ACCOUNTID = P_TARGET_ACCOUNT_ID;
+        DBMS_OUTPUT.PUT_LINE('INSUFFICIENT BALANCE.');
     END IF;
-
-    COMMIT; -- Commit the changes
 END;
