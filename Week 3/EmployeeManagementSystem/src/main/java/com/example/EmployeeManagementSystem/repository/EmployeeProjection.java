@@ -1,4 +1,4 @@
-package com.example.EmployeeManagementSystem.projection;
+package com.example.EmployeeManagementSystem.repository;
 
 import org.springframework.beans.factory.annotation.Value;
 
