@@ -1,11 +1,15 @@
+package StrategyPatternExample;
+
 public class PaymentContext {
-    private PaymentStrategy paymentStrategy;
 
-    public void setPaymentStrategy(PaymentStrategy paymentStrategy) {
-        this.paymentStrategy = paymentStrategy;
+    private PaymentStrategy strategy;
+
+    public void setStrategy(PaymentStrategy strategy) {
+        this.strategy = strategy;
     }
 
-    public void executePayment(double amount) {
-        paymentStrategy.pay(amount);
+    public void processPayment(long amount) {
+        strategy.pay(amount);
     }
+
 }
