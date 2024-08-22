@@ -1,10 +1,6 @@
--- Write a function CalculateAge that takes a customer's date of birth as input and returns their age in years.
-
-CREATE OR REPLACE FUNCTION CALCULATEAGE (
-    DOB DATE
+CREATE OR REPLACE FUNCTION CALCULATEAGE(
+    DOB IN CUSTOMERS.DOB%TYPE
 ) RETURN NUMBER IS
-    AGE NUMBER;
 BEGIN
-    AGE := FLOOR(MONTHS_BETWEEN(SYSDATE, DOB) / 12);
-    RETURN AGE;
+    RETURN FLOOR(MONTHS_BETWEEN(SYSDATE, DOB)/12);
 END;
