@@ -1,12 +1,14 @@
 package com.example.EmployeeManagementSystem.service;
 
-import java.util.List;
-
+import java.util.Optional;
+import java.util.ArrayList;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.data.domain.Pageable;
 import com.example.EmployeeManagementSystem.model.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.EmployeeManagementSystem.projection.EmployeeProjection;
 import com.example.EmployeeManagementSystem.repository.EmployeeRepository;
 
 @Service
@@ -15,15 +17,45 @@ public class EmployeeService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
-    @Transactional
-    public void batchSaveEmployees(List<Employee> employees) {
-        int batchSize = 50; // Example batch size
-        for (int i = 0; i < employees.size(); i++) {
-            employeeRepository.save(employees.get(i));
-            if (i % batchSize == 0 && i > 0) {
-                // Flush a batch of inserts and release memory
-                employeeRepository.flush();
-            }
-        }
+    public void save(Employee entry) {
+        employeeRepository.save(entry);
     }
+
+    public ArrayList<Employee> findAll() {
+        return new ArrayList<>(employeeRepository.findAll());
+    }
+
+    public ArrayList<EmployeeProjection> getOverview() {
+        return employeeRepository.findAllBy();
+    }
+
+    public ArrayList<Employee> findAll(String field) {
+        return new ArrayList<>(employeeRepository.findAll(Sort.by(Sort.Direction.ASC, field)));
+    }
+
+    public Page<Employee> findAll(Pageable pageable) {
+        Page<Employee> page = employeeRepository.findAll(pageable);
+        return page;
+    }
+
+    public Optional<Employee> findById(Long id) {
+        return employeeRepository.findById(id);
+    }
+
+    public ArrayList<Employee> findByName(String name) {
+        return employeeRepository.findByName(name);
+    }
+
+    public ArrayList<Employee> findByEmail(String email) {
+        return employeeRepository.findByEmail(email);
+    }
+
+    public ArrayList<Employee> findByDepartmentId(Long id) {
+        return employeeRepository.findByDepartmentId(id);
+    }
+
+    public void deleteById(Long id) {
+        employeeRepository.deleteById(id);
+    }
+
 }
