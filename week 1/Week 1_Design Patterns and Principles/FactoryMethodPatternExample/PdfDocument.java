@@ -1,17 +1,14 @@
 public class PdfDocument implements Document {
 
-    @Override
-    public void open() {
-        System.out.println("Opening PDF document");
+    public String open() {
+        return "Opening pdf document";
     }
 
-    @Override
-    public void save() {
-        System.out.println("Saving PDF document");
+    public String save() {
+        return "Saving pdf document.";
     }
 
-    @Override
-    public void close() {
-        System.out.println("Closing PDF document");
+    public String close() {
+        return "Closing pdf document.";
     }
 }
