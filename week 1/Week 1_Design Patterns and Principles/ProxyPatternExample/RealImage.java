@@ -1,17 +1,12 @@
+package ProxyPatternExample;
+
 public class RealImage implements Image {
-    private String filename;
 
-    public RealImage(String filename) {
-        this.filename = filename;
-        loadImageFromDisk();
+    public String display(String name) {
+
+        System.out.println("Displaying " + name);
+        return name;
+
     }
 
-    private void loadImageFromDisk() {
-        System.out.println("Loading image from disk: " + filename);
-    }
-
-    @Override
-    public void display() {
-        System.out.println("Displaying image: " + filename);
-    }
 }
