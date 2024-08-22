@@ -1,17 +1,14 @@
 public class ExcelDocument implements Document {
 
-    @Override
-    public void open() {
-        System.out.println("Opening Excel document");
+    public String open() {
+        return "Opening excel document";
     }
 
-    @Override
-    public void save() {
-        System.out.println("Saving Excel document");
+    public String save() {
+        return "Saving excel document.";
     }
 
-    @Override
-    public void close() {
-        System.out.println("Closing Excel document");
+    public String close() {
+        return "Closing excel document.";
     }
 }
