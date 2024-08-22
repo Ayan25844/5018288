@@ -1,9 +1,11 @@
 public class Light {
-    public void turnOn() {
-        System.out.println("The light is on.");
+
+    public void switchOff() {
+        System.out.println("Switching off lights.");
     }
 
-    public void turnOff() {
-        System.out.println("The light is off.");
+    public void switchOn() {
+        System.out.println("Switching on lights");
     }
+
 }
