@@ -1,14 +1,10 @@
+package StrategyPatternExample;
+
 public class PayPalPayment implements PaymentStrategy {
-    protected String email;
-    protected String password;
 
-    public PayPalPayment(String email, String password) {
-        this.email = email;
-        this.password = password;
+    public void pay(long amount) {
+
+        System.out.println("Paying an amount of " + amount + " ruppees via pay pal card.");
     }
 
-    @Override
-    public void pay(double amount) {
-        System.out.println(amount + " paid using PayPal.");
-    }
 }
