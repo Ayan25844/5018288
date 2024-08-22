@@ -1,4 +1,4 @@
-public class Test {
+public class Test_10 {
     public static void main(String[] args) {
 
         // Create a Student object (Model)
