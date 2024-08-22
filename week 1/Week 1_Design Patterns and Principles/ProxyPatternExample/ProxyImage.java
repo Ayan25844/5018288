@@ -1,16 +1,20 @@
+package ProxyPatternExample;
+
+import java.util.HashMap;
+
 public class ProxyImage implements Image {
-    private RealImage realImage;
-    private String filename;
 
-    public ProxyImage(String filename) {
-        this.filename = filename;
-    }
+    private final Image image = new RealImage();
+    HashMap<String, String> map = new HashMap<>();
 
-    @Override
-    public void display() {
-        if (realImage == null) {
-            realImage = new RealImage(filename);
+    public String display(String name) {
+
+        if (!map.containsKey(name)) {
+            map.put(name, image.display(name));
         }
-        realImage.display();
+
+        return map.get(name);
+
     }
+
 }
