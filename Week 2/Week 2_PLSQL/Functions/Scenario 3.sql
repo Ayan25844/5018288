@@ -1,27 +1,18 @@
--- Write a function HasSufficientBalance that takes an account ID and an amount as input and returns a boolean indicating whether the account has at least the specified amount.
-
-CREATE OR REPLACE FUNCTION HASSUFFICIENTBALANCE (
-    P_ACCOUNTID NUMBER,
-    P_AMOUNT NUMBER
-) RETURN NUMBER IS
-    V_BALANCE NUMBER;
+CREATE OR REPLACE FUNCTION HASSUFFICIENTBALANCE(
+    ID IN ACCOUNTS.ACCOUNTID%TYPE,
+    AMOUNT IN TRANSACTIONS.AMOUNT%TYPE
+) RETURN VARCHAR2 IS
+    BAL ACCOUNTS.BALANCE%TYPE;
 BEGIN
- 
-    -- Retrieve the balance for the given account ID
     SELECT
-        MAX(BALANCE) INTO V_BALANCE
+        BALANCE INTO BAL
     FROM
         ACCOUNTS
     WHERE
-        ACCOUNTID = P_ACCOUNTID;
- 
-    -- Check if the balance is sufficient
-    IF V_BALANCE >= P_AMOUNT THEN
-        RETURN 1; -- True
+        ACCOUNTID=ID;
+    IF BAL>=AMOUNT THEN
+        RETURN 'TRUE';
     ELSE
-        RETURN 0; -- False
+        RETURN 'FALSE';
     END IF;
-EXCEPTION
-    WHEN NO_DATA_FOUND THEN
-        RETURN 0; -- False if account not found
 END;
