@@ -1,47 +1,37 @@
--- Write a stored procedure AddNewCustomer that inserts a new customer into the Customers table. If a customer with the same ID already exists, handle the exception by logging an error and preventing the insertion.
-
-CREATE OR REPLACE PROCEDURE ADDNEWCUSTOMER (
-    P_CUSTOMERID IN NUMBER,
-    P_NAME IN VARCHAR2,
-    P_DOB IN DATE,
-    P_BALANCE IN NUMBER
+CREATE OR REPLACE PROCEDURE ADDNEWCUSTOMER(
+    ID IN CUSTOMERS.CUSTOMERID%TYPE,
+    NAME IN CUSTOMERS."NAME"%TYPE,
+    DOB IN CUSTOMERS.DOB%TYPE,
+    BALANCE IN CUSTOMERS.BALANCE%TYPE,
+    LASTMODIFIED IN CUSTOMERS.LASTMODIFIED%TYPE,
+    ISVIP IN CUSTOMERS.ISVIP%TYPE
 ) IS
-    CUSTOMER_EXISTS EXCEPTION;
-    CUSTOMER_EXISTS_MSG VARCHAR2(100);
+    COUNTRECORD NUMBER;
 BEGIN
- 
-    -- Attempt to insert a new customer
-    BEGIN
-        INSERT INTO CUSTOMERS (
-            CUSTOMERID,
-            NAME,
-            DOB,
-            BALANCE,
-            LASTMODIFIED
-        ) VALUES (
-            P_CUSTOMERID,
-            P_NAME,
-            P_DOB,
-            P_BALANCE,
-            SYSDATE
-        );
- 
-        -- Commit the transaction
-        COMMIT;
-    EXCEPTION
-        WHEN DUP_VAL_ON_INDEX THEN
- 
-            -- Handle the case where the customer ID already exists
-            CUSTOMER_EXISTS_MSG := 'Customer with ID '
-                                   || P_CUSTOMERID
-                                   || ' already exists.';
-            DBMS_OUTPUT.PUT_LINE(CUSTOMER_EXISTS_MSG);
-            RAISE_APPLICATION_ERROR(-20001, CUSTOMER_EXISTS_MSG);
-        WHEN OTHERS THEN
- 
-            -- Handle any other unexpected errors
-            DBMS_OUTPUT.PUT_LINE('An unexpected error occurred: '
-                                 || SQLERRM);
-            RAISE;
-    END;
-END ADDNEWCUSTOMER;
+    SELECT
+        COUNT(*) INTO COUNTRECORD
+    FROM
+        CUSTOMERS
+    WHERE
+        CUSTOMERID=ID;
+    IF COUNTRECORD>0 THEN
+        RAISE_APPLICATION_ERROR(-20001, 'CUSTOMER ID '
+                                        ||ID
+                                        ||' ALREADY EXISTS IN THE RELATION.');
+    END IF;
+
+    INSERT INTO CUSTOMERS VALUES(
+        ID,
+        NAME,
+        DOB,
+        BALANCE,
+        LASTMODIFIED,
+        ISVIP
+    );
+EXCEPTION
+    WHEN OTHERS THEN
+        DBMS_OUTPUT.PUT_LINE('ERROR CODE: '
+                             ||SQLCODE);
+        DBMS_OUTPUT.PUT_LINE('ERROR MESSEGE: '
+                             ||SQLERRM);
+END;
