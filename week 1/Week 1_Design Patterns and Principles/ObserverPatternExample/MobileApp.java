@@ -1,12 +1,13 @@
 public class MobileApp implements Observer {
-    private String appName;
 
-    public MobileApp(String appName) {
-        this.appName = appName;
+    private final String mobile;
+
+    public MobileApp(String mobile) {
+        this.mobile = mobile;
     }
 
-    @Override
-    public void update(double stockPrice) {
-        System.out.println(appName + " received stock price update: " + stockPrice);
+    public void update() {
+        System.out.println("Updating " + this.mobile + " via mobile app.");
     }
+
 }
