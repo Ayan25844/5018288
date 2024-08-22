@@ -1,12 +1,13 @@
 public class LightOffCommand implements Command {
+
     private Light light;
 
-    public LightOffCommand(Light light) {
-        this.light = light;
+    public LightOffCommand() {
+        light = new Light();
     }
 
-    @Override
     public void execute() {
-        light.turnOff();
+        light.switchOff();
     }
+
 }
