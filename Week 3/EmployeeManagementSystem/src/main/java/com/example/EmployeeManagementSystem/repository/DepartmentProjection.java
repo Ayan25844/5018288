@@ -1,13 +1,13 @@
-package com.example.EmployeeManagementSystem.repository;
+package com.example.EmployeeManagementSystem.projection;
 
 import org.springframework.beans.factory.annotation.Value;
 
 public interface DepartmentProjection {
 
-    Long getId();
+    @Value("#{target.id}")
+    public Long getId();
 
-    String getName();
+    @Value("#{target.name}")
+    public String getName();
 
-    @Value("#{target.employees.size()}")
-    Integer getEmployeeCount();
 }
