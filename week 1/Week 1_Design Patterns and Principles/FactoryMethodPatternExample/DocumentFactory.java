@@ -1,8 +1,5 @@
 public abstract class DocumentFactory {
 
-    public abstract void createDocument();
+    public abstract Document createDocument();
 
-    public void openDocument() {
-        createDocument();
-    }
 }
