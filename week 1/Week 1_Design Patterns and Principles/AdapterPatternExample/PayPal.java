@@ -1,5 +1,6 @@
 public class PayPal {
-    public void sendPayment(double amount) {
-        System.out.println("Processing payment of $" + amount + " through PayPal.");
+
+    public String sendPayment() {
+        return "Transaction completed from PayPal account.";
     }
 }
