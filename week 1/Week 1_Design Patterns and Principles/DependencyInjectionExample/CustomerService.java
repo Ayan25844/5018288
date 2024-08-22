@@ -1,12 +1,13 @@
 public class CustomerService {
-    private final CustomerRepository customerRepository;
 
-    // Constructor injection
-    public CustomerService(CustomerRepository customerRepository) {
-        this.customerRepository = customerRepository;
+    private CustomerRepository customer;
+
+    public CustomerService(CustomerRepository customer) {
+        this.customer = customer;
     }
 
-    public String getCustomer(String id) {
-        return customerRepository.findCustomerById(id);
+    public void getId(int id) {
+        this.customer.findCustomerById(id);
     }
+
 }
