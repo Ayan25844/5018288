@@ -1,3 +1,7 @@
 public interface Notifier {
-    void send(String message);
+
+    public void send(String msg);
+
+    public String getUserName();
+
 }
