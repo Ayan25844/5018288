@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import com.example.EmployeeManagementSystem.model.Department;
 import org.springframework.beans.factory.annotation.Autowired;
-import com.example.EmployeeManagementSystem.projection.DepartmentProjection;
+import com.example.EmployeeManagementSystem.repository.DepartmentProjection;
 import com.example.EmployeeManagementSystem.repository.DepartmentRepository;
 
 @Service
