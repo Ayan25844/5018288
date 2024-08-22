@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import com.example.EmployeeManagementSystem.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.example.EmployeeManagementSystem.projection.EmployeeProjection;
+import com.example.EmployeeManagementSystem.repository.EmployeeProjection;
 
 @Repository
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
