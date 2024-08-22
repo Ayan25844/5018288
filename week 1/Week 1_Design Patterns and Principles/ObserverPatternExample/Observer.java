@@ -1,3 +1,5 @@
 public interface Observer {
-    void update(double stockPrice);
+
+    public void update();
+
 }
