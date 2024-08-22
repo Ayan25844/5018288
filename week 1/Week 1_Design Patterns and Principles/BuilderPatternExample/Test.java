@@ -1,24 +1,27 @@
-public class Test {
+package BuilderPatternExample;
+
+import BuilderPatternExample.Computer.Builder;
+
+public class Test_3 {
+
     public static void main(String[] args) {
 
-        Computer gamingPC = new Computer.Builder("Intel i9", "32GB")
-                .setGraphicsCard("NVIDIA RTX 3080")
-                .setStorage("1TB SSD")
-                .setPowerSupply("850W")
-                .setMotherboard("ASUS ROG")
-                .build();
+        Builder combuilder = new Builder();
+        combuilder.setCPU("CPU_Type_1");
+        combuilder.setRAM("RAM_Type_1");
+        combuilder.setStorage("Storage_Type_1");
 
-        Computer officePC = new Computer.Builder("Intel i5", "16GB")
-                .setStorage("512GB SSD")
-                .setPowerSupply("500W")
-                .build();
+        Computer com = combuilder.build();
+        System.out.println(com.getCPU() + ' ' + com.getRAM() + ' ' + com.getStorage());
 
-        Computer budgetPC = new Computer.Builder("AMD Ryzen 3", "8GB")
-                .setStorage("256GB SSD")
-                .build();
+        Builder combuilder_2 = new Builder();
+        combuilder_2.setRAM("RAM_Type__2");
+        combuilder_2.setDisplay("Display_2");
+        combuilder_2.setStorage("Storage_Type__2");
 
-        System.out.println("Gaming PC: " + gamingPC);
-        System.out.println("Office PC: " + officePC);
-        System.out.println("Budget PC: " + budgetPC);
+        Computer com_2 = combuilder_2.build();
+        System.out.println(com_2.getDisplay() + ' ' + com_2.getRAM() + ' ' + com_2.getStorage());
+
     }
+
 }
