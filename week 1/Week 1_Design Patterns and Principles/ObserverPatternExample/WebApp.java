@@ -1,12 +1,13 @@
 public class WebApp implements Observer {
-    private String appName;
 
-    public WebApp(String appName) {
-        this.appName = appName;
+    private final String mobile;
+
+    public WebApp(String mobile) {
+        this.mobile = mobile;
     }
 
-    @Override
-    public void update(double stockPrice) {
-        System.out.println(appName + " received stock price update: " + stockPrice);
+    public void update() {
+        System.out.println("Updating " + this.mobile + " via web app.");
     }
+
 }
