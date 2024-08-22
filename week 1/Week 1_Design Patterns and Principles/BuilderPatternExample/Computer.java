@@ -1,76 +1,73 @@
+package BuilderPatternExample;
+
 public class Computer {
-    // Attributes
+
     private String CPU;
     private String RAM;
-    private String storage;
-    private String graphicsCard;
-    private String powerSupply;
-    private String motherboard;
+    private String Storage;
+    private String Display;
+    private String Graphics;
 
-    // Private constructor to be called by the Builder
-    private Computer(Builder builder) {
-        this.CPU = builder.CPU;
-        this.RAM = builder.RAM;
-        this.storage = builder.storage;
-        this.graphicsCard = builder.graphicsCard;
-        this.powerSupply = builder.powerSupply;
-        this.motherboard = builder.motherboard;
+    private Computer(Builder Builder) {
+        this.CPU = Builder.CPU;
+        this.RAM = Builder.RAM;
+        this.Storage = Builder.Storage;
+        this.Display = Builder.Display;
+        this.Graphics = Builder.Graphics;
+    };
+
+    public String getCPU() {
+        return this.CPU;
     }
 
-    // Static nested Builder class
+    public String getRAM() {
+        return this.RAM;
+    }
+
+    public String getStorage() {
+        return this.Storage;
+    }
+
+    public String getDisplay() {
+        return this.Display;
+    }
+
+    public String getGraphics() {
+        return this.Graphics;
+    }
+
     public static class Builder {
-        // Required attributes
+
         private String CPU;
         private String RAM;
+        private String Storage;
+        private String Display;
+        private String Graphics;
 
-        // Optional attributes
-        private String storage;
-        private String graphicsCard;
-        private String powerSupply;
-        private String motherboard;
-
-        // Builder constructor for required attributes
-        public Builder(String CPU, String RAM) {
+        public void setCPU(String CPU) {
             this.CPU = CPU;
+        }
+
+        public void setRAM(String RAM) {
             this.RAM = RAM;
         }
 
-        // Methods to set optional attributes
-        public Builder setStorage(String storage) {
-            this.storage = storage;
-            return this;
+        public void setStorage(String Storage) {
+            this.Storage = Storage;
         }
 
-        public Builder setGraphicsCard(String graphicsCard) {
-            this.graphicsCard = graphicsCard;
-            return this;
+        public void setDisplay(String Display) {
+            this.Display = Display;
         }
 
-        public Builder setPowerSupply(String powerSupply) {
-            this.powerSupply = powerSupply;
-            return this;
+        public void setGraphics(String Graphics) {
+            this.Graphics = Graphics;
         }
 
-        public Builder setMotherboard(String motherboard) {
-            this.motherboard = motherboard;
-            return this;
-        }
-
-        // Build method to create Computer instance
         public Computer build() {
             return new Computer(this);
         }
+
     }
 
-    @Override
-    public String toString() {
-        return "Computer{" +
-                "CPU='" + CPU + '\'' +
-                ", RAM='" + RAM + '\'' +
-                ", storage='" + storage + '\'' +
-                ", graphicsCard='" + graphicsCard + '\'' +
-                ", powerSupply='" + powerSupply + '\'' +
-                ", motherboard='" + motherboard + '\'' +
-                '}';
-    }
 }
