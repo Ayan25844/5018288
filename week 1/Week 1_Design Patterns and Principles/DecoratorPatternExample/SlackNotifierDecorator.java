@@ -1,15 +1,12 @@
 public class SlackNotifierDecorator extends NotifierDecorator {
+
     public SlackNotifierDecorator(Notifier wrapped) {
         super(wrapped);
     }
 
-    @Override
-    public void send(String message) {
-        super.send(message);
-        sendSlackMessage(message);
+    public void send(String msg) {
+        super.send(msg);
+        System.out.println("Sending " + msg + " by slack to " + super.getUserName());
     }
 
-    private void sendSlackMessage(String message) {
-        System.out.println("Sending Slack message with message: " + message);
-    }
 }
