@@ -1,12 +1,14 @@
 package com.example.EmployeeManagementSystem.service;
 
-import java.util.List;
-
+import java.util.Optional;
+import java.util.ArrayList;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Transactional;
-
+import org.springframework.data.domain.Pageable;
 import com.example.EmployeeManagementSystem.model.Department;
+import org.springframework.beans.factory.annotation.Autowired;
+import com.example.EmployeeManagementSystem.projection.DepartmentProjection;
 import com.example.EmployeeManagementSystem.repository.DepartmentRepository;
 
 @Service
@@ -15,15 +17,37 @@ public class DepartmentService {
     @Autowired
     private DepartmentRepository departmentRepository;
 
-    @Transactional
-    public void batchSaveDepartments(List<Department> departments) {
-        int batchSize = 50; // Example batch size
-        for (int i = 0; i < departments.size(); i++) {
-            departmentRepository.save(departments.get(i));
-            if (i % batchSize == 0 && i > 0) {
-                // Flush a batch of inserts and release memory
-                departmentRepository.flush();
-            }
-        }
+    public void save(Department entry) {
+        departmentRepository.save(entry);
     }
+
+    public ArrayList<Department> findAll() {
+        return new ArrayList<>(departmentRepository.findAll());
+    }
+
+    public ArrayList<DepartmentProjection> getOverview() {
+        return departmentRepository.findAllBy();
+    }
+
+    public ArrayList<Department> findAll(String field) {
+        return new ArrayList<>(departmentRepository.findAll(Sort.by(Sort.Direction.ASC, field)));
+    }
+
+    public Page<Department> findAll(Pageable pageable) {
+        Page<Department> page = departmentRepository.findAll(pageable);
+        return page;
+    }
+
+    public Optional<Department> findById(Long id) {
+        return departmentRepository.findById(id);
+    }
+
+    public ArrayList<Department> findByName(String name) {
+        return departmentRepository.findByName(name);
+    }
+
+    public void deleteById(Long id) {
+        departmentRepository.deleteById(id);
+    }
+
 }
