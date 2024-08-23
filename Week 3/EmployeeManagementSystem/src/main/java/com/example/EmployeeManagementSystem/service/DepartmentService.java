@@ -38,7 +38,7 @@ public class DepartmentService {
         return page;
     }
 
-    public Optional<Department> findById(Long id) {
+    public Optional<Department> findById(Integer id) {
         return departmentRepository.findById(id);
     }
 
@@ -46,7 +46,7 @@ public class DepartmentService {
         return departmentRepository.findByName(name);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         departmentRepository.deleteById(id);
     }
 
