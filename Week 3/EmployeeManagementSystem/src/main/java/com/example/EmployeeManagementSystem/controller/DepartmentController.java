@@ -71,7 +71,7 @@ public class DepartmentController {
     }
 
     @GetMapping("id/{id}")
-    public ResponseEntity<?> getEntry(@PathVariable Long id) {
+    public ResponseEntity<?> getEntry(@PathVariable Integer id) {
         if (departmentService.findById(id).isPresent()) {
             return new ResponseEntity<>(departmentService.findById(id).get(), HttpStatus.OK);
         }
@@ -97,7 +97,7 @@ public class DepartmentController {
     }
 
     @PutMapping("id/{id}")
-    public ResponseEntity<?> updateEntry(@PathVariable Long id, @RequestBody Department entry) {
+    public ResponseEntity<?> updateEntry(@PathVariable Integer id, @RequestBody Department entry) {
         Department old = departmentService.findById(id).get();
         if (departmentService.findById(id).isPresent()) {
             old.setName(entry.getName() != null && !entry.getName().equals("") ? entry.getName() : old.getName());
@@ -109,7 +109,7 @@ public class DepartmentController {
     }
 
     @DeleteMapping("id/{id}")
-    public ResponseEntity<?> deleteEntry(@PathVariable Long id) {
+    public ResponseEntity<?> deleteEntry(@PathVariable Integer id) {
         if (departmentService.findById(id).isPresent()) {
             departmentService.deleteById(id);
             return new ResponseEntity<>(true, HttpStatus.OK);
