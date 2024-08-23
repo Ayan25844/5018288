@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.EmployeeManagementSystem.repository.EmployeeProjection;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
 
     ArrayList<EmployeeProjection> findAllBy();
 
@@ -20,5 +20,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     public ArrayList<Employee> findByEmail(@Param("email") String email);
 
     @Query(name = "Employee.findByDepartmentId")
-    public ArrayList<Employee> findByDepartmentId(@Param("id") Long id);
+    public ArrayList<Employee> findByDepartmentId(@Param("id") Integer id);
 }
