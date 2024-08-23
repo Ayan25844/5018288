@@ -38,7 +38,7 @@ public class EmployeeService {
         return page;
     }
 
-    public Optional<Employee> findById(Long id) {
+    public Optional<Employee> findById(Integer id) {
         return employeeRepository.findById(id);
     }
 
@@ -50,11 +50,11 @@ public class EmployeeService {
         return employeeRepository.findByEmail(email);
     }
 
-    public ArrayList<Employee> findByDepartmentId(Long id) {
+    public ArrayList<Employee> findByDepartmentId(Integer id) {
         return employeeRepository.findByDepartmentId(id);
     }
 
-    public void deleteById(Long id) {
+    public void deleteById(Integer id) {
         employeeRepository.deleteById(id);
     }
 
