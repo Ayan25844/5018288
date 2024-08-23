@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.EmployeeManagementSystem.repository.DepartmentProjection;
 
 @Repository
-public interface DepartmentRepository extends JpaRepository<Department, Long> {
+public interface DepartmentRepository extends JpaRepository<Department, Integer> {
 
     public ArrayList<DepartmentProjection> findAllBy();
 
