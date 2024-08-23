@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 public interface EmployeeProjection {
 
     @Value("#{target.id}")
-    Long getId();
+    public Integer getId();
 
     @Value("#{target.name}")
     public String getName();
