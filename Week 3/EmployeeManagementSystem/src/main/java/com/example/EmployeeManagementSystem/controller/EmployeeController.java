@@ -72,7 +72,7 @@ public class EmployeeController {
     }
 
     @GetMapping("id/{id}")
-    public ResponseEntity<?> getEntry(@PathVariable Long id) {
+    public ResponseEntity<?> getEntry(@PathVariable Integer id) {
         if (employeeService.findById(id).isPresent()) {
             return new ResponseEntity<>(employeeService.findById(id).get(), HttpStatus.OK);
         }
@@ -99,7 +99,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("id/{id}")
-    public ResponseEntity<?> deleteEntry(@PathVariable Long id) {
+    public ResponseEntity<?> deleteEntry(@PathVariable Integer id) {
         if (employeeService.findById(id).isPresent()) {
             employeeService.deleteById(id);
             return new ResponseEntity<>(true, HttpStatus.OK);
@@ -109,12 +109,12 @@ public class EmployeeController {
     }
 
     @PutMapping("id/{id}")
-    public ResponseEntity<Employee> updateEntry(@PathVariable Long id, @RequestBody Employee entry) {
+    public ResponseEntity<Employee> updateEntry(@PathVariable Integer id, @RequestBody Employee entry) {
         Employee old = employeeService.findById(id).get();
         if (old != null) {
             old.setName(entry.getName() != null && !entry.getName().equals("") ? entry.getName() : old.getName());
             old.setEmail(entry.getEmail() != null && !entry.getEmail().equals("") ? entry.getEmail() : old.getEmail());
-            old.setDepartment(entry.getDepartment() != null ? entry.getDepartment() : old.getDepartment());
+            old.setDepartment(entry.getDepartment() != null && entry.getDepartment().getId()!=null ? entry.getDepartment() : old.getDepartment());
             employeeService.save(old);
             return new ResponseEntity<>(old, HttpStatus.OK);
         } else {
