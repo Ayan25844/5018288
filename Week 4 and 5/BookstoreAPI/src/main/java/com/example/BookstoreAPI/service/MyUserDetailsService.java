@@ -1,27 +1,27 @@
 package com.example.BookstoreAPI.service;
 
-import java.util.ArrayList;
-
-import org.apache.catalina.User;
+import org.springframework.stereotype.Service;
+import com.example.BookstoreAPI.entity.Customer;
+import com.example.BookstoreAPI.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 @Service
-public class MyUserDetailsService implements UserDetailsService {
+public class CustomerDetailsService implements UserDetailsService {
 
     @Autowired
-    private UserRepository userRepository;
+    private CustomerRepository customerRepository;
 
-    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByUsername(username);
-        if (user == null) {
-            throw new Exception("User not found");
+        Customer customer = customerRepository.getByName(username).get();
+        if (customer != null) {
+            return org.springframework.security.core.userdetails.User.builder().username(customer.getName())
+                    .password(customer.getPassword())
+                    .roles(customer.getRoles().toArray(new String[0]))
+                    .build();
         }
-        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),
-                new ArrayList<>());
+        throw new UsernameNotFoundException("Customer not found with username: " + username);
     }
 }
