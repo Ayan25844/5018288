@@ -1,48 +1,71 @@
 package com.example.BookstoreAPI.service;
 
-import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import com.example.BookstoreAPI.dto.BookDTO;
+import com.example.BookstoreAPI.mapper.BookMapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.springframework.data.domain.Sort;
+import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Pageable;
+import com.example.BookstoreAPI.repository.BookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class BookService {
 
-    private final List<BookDTO> books = new ArrayList<>();
+    @Autowired
+    private BookMapper bookMapper;
 
-    public BookService() {
-        books.add(new BookDTO(1L, "Spring Boot in Action", "Craig Walls", 29.99, "978-1617292545"));
-        books.add(new BookDTO(2L, "Effective Java", "Joshua Bloch", 39.95, "978-0134685991"));
+    @Autowired
+    private BookRepository bookRepository;
+
+    @Transactional
+    public void save(BookDTO entry) {
+        bookRepository.save(bookMapper.toBook(entry));
     }
 
-    public List<BookDTO> getAllBooks() {
-        return books;
+    public List<BookDTO> getAll() {
+        return bookRepository.findAll().stream().map(bookMapper::toDTO).collect(Collectors.toList());
     }
 
-    public BookDTO getBookById(Long id) {
-        return books.stream()
-                .filter(book -> book.getId().equals(id))
-                .findFirst()
-                .orElse(null);
+    public List<BookDTO> getAll(Pageable pageable) {
+        List<BookDTO> page = bookRepository.findAll(pageable).stream().map(bookMapper::toDTO)
+                .collect(Collectors.toList());
+        return page;
     }
 
-    public void addBook(BookDTO book) {
-        books.add(book);
+    public List<BookDTO> getAll(String field) {
+        return new ArrayList<>(bookRepository.findAll(Sort.by(Sort.Direction.ASC,
+                field))).stream().map(bookMapper::toDTO)
+                .collect(Collectors.toList());
     }
 
-    public void updateBook(Long id, BookDTO updatedBook) {
-        for (int i = 0; i < books.size(); i++) {
-            BookDTO book = books.get(i);
-            if (book.getId().equals(id)) {
-                books.set(i, updatedBook);
-                return;
-            }
-        }
+    public BookDTO getById(Integer id) {
+        return bookRepository.findById(id).map(bookMapper::toDTO).orElse(null);
     }
 
-    public void deleteBook(Long id) {
-        books.removeIf(book -> book.getId().equals(id));
+    public List<BookDTO> getByIsbn(String isbn) {
+        return bookRepository.getByIsbn(isbn).stream().map(bookMapper::toDTO).collect(Collectors.toList());
     }
+
+    public List<BookDTO> getByTitle(String title) {
+        return bookRepository.getByTitle(title).stream().map(bookMapper::toDTO).collect(Collectors.toList());
+    }
+
+    public List<BookDTO> getByPrice(Integer price) {
+        return bookRepository.getByPrice(price).stream().map(bookMapper::toDTO).collect(Collectors.toList());
+    }
+
+    public List<BookDTO> getByAuthor(String author) {
+        return bookRepository.getByAuthor(author).stream().map(bookMapper::toDTO).collect(Collectors.toList());
+    }
+
+    public void deleteById(Integer id) {
+        bookRepository.deleteById(id);
+    }
+
 }
