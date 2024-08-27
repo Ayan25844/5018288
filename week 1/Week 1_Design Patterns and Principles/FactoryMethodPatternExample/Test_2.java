@@ -2,20 +2,23 @@ public class Test_2 {
 
     public static void main(String[] args) {
 
-        Document word = new WordDocument();
-        System.out.println(word.open());
-        System.out.println(word.save());
-        System.out.println(word.close());
+        WordDocumentFactory word = new WordDocumentFactory();
+        Document wordDocument = word.createDocument();
+        System.out.println(wordDocument.open());
+        System.out.println(wordDocument.save());
+        System.out.println(wordDocument.close());
 
-        Document excel = new ExcelDocument();
-        System.out.println(excel.open());
-        System.out.println(excel.save());
-        System.out.println(excel.close());
+        ExcelDocumentFactory excel = new ExcelDocumentFactory();
+        Document ExcelDocument = excel.createDocument();
+        System.out.println(ExcelDocument.open());
+        System.out.println(ExcelDocument.save());
+        System.out.println(ExcelDocument.close());
 
-        Document pdf = new PdfDocument();
-        System.out.println(pdf.open());
-        System.out.println(pdf.save());
-        System.out.println(pdf.close());
+        PdfDocumentFactory pdf = new PdfDocumentFactory();
+        Document pdfDocument = pdf.createDocument();
+        System.out.println(pdfDocument.open());
+        System.out.println(pdfDocument.save());
+        System.out.println(pdfDocument.close());
 
     }
 
