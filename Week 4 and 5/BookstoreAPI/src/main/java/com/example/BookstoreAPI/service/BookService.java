@@ -5,14 +5,18 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import com.example.BookstoreAPI.dto.BookDTO;
+import com.example.BookstoreAPI.entity.Book;
 import com.example.BookstoreAPI.mapper.BookMapper;
+import com.example.BookstoreAPI.controller.BookController;
 
+import org.springframework.hateoas.Link;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.data.domain.Pageable;
 import com.example.BookstoreAPI.repository.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.hateoas.server.mvc.WebMvcLinkBuilder;
 
 @Service
 public class BookService {
@@ -29,27 +33,45 @@ public class BookService {
     }
 
     public List<BookDTO> getAll() {
-        return bookRepository.findAll().stream().map(bookMapper::toDTO).collect(Collectors.toList());
+        return bookRepository.findAll().stream().map(book -> {
+            BookDTO dto = bookMapper.toDTO(book);
+            Link link = WebMvcLinkBuilder.linkTo(BookController.class).slash(book.getTitle()).withSelfRel();
+            dto.add(link);
+            return dto;
+        }).collect(Collectors.toList());
     }
 
     public List<BookDTO> getAll(Pageable pageable) {
-        List<BookDTO> page = bookRepository.findAll(pageable).stream().map(bookMapper::toDTO)
-                .collect(Collectors.toList());
+        List<BookDTO> page = bookRepository.findAll(pageable).stream().map(book -> {
+            BookDTO dto = bookMapper.toDTO(book);
+            Link link = WebMvcLinkBuilder.linkTo(BookController.class).slash(book.getTitle()).withSelfRel();
+            dto.add(link);
+            return dto;
+        }).collect(Collectors.toList());
         return page;
     }
 
     public List<BookDTO> getAll(String field) {
         return new ArrayList<>(bookRepository.findAll(Sort.by(Sort.Direction.ASC,
-                field))).stream().map(bookMapper::toDTO)
-                .collect(Collectors.toList());
+                field))).stream().map(book -> {
+                    BookDTO dto = bookMapper.toDTO(book);
+                    Link link = WebMvcLinkBuilder.linkTo(BookController.class).slash(book.getTitle()).withSelfRel();
+                    dto.add(link);
+                    return dto;
+                }).collect(Collectors.toList());
     }
 
     public BookDTO getById(Integer id) {
         return bookRepository.findById(id).map(bookMapper::toDTO).orElse(null);
     }
 
-    public List<BookDTO> getByIsbn(String isbn) {
-        return bookRepository.getByIsbn(isbn).stream().map(bookMapper::toDTO).collect(Collectors.toList());
+    public BookDTO getByIsbn(String isbn) {
+        Book book = bookRepository.getByIsbn(isbn);
+        if (book != null) {
+            return bookMapper.toDTO(book);
+        } else {
+            return null;
+        }
     }
 
     public List<BookDTO> getByTitle(String title) {
