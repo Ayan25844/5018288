@@ -1,9 +1,13 @@
 package com.example.BookstoreAPI.dto;
 
+import org.springframework.hateoas.RepresentationModel;
+
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 @Data
-public class BookDTO {
+@EqualsAndHashCode(callSuper = true)
+public class BookDTO extends RepresentationModel<BookDTO> {
 
     private Integer id;
     private String isbn;
